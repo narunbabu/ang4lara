@@ -12,34 +12,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var app_config_1 = require("../app.config");
-var UserService = (function () {
-    function UserService(http, config) {
+var myres;
+var ArticleService = (function () {
+    function ArticleService(http, config) {
         this.http = http;
         this.config = config;
     }
-    UserService.prototype.getAll = function () {
-        console.log(JSON.stringify(this.jwt().headers.values()[0][0]));
+    ArticleService.prototype.getAll = function () {
+        // console.log(JSON.stringify(this.jwt().headers.values()[0][0]));
         var mytoken = JSON.parse(localStorage.getItem('currentUser')).token;
-        console.log(JSON.parse(localStorage.getItem('currentUser')).token);
-        return this.http.get(this.config.apiUrl + '/articles/2' + '?token=' + mytoken).map(function (response) { console.log(response); }); //
-        // response.json());
+        console.log(JSON.parse(localStorage.getItem('currentUser')));
+        return this.http.get(this.config.apiUrl + '/articles' + '?token=' + mytoken).map(function (response) {
+            // {console.log(response);myres=response;}) ;//
+            return response.json();
+        });
+        //    return myres.json();
         // return this.http.get(this.config.apiUrl + '/articles/2', this.jwt()).map((response: Response) =>
         // response.json());
     };
-    UserService.prototype.getById = function (id) {
-        return this.http.get(this.config.apiUrl + '/users/' + id, this.jwt()).map(function (response) { return response.json(); });
-    };
-    UserService.prototype.create = function (user) {
-        return this.http.post(this.config.apiUrl + '/users', user, this.jwt());
-    };
-    UserService.prototype.update = function (user) {
-        return this.http.put(this.config.apiUrl + '/users/' + user.id, user, this.jwt());
-    };
-    UserService.prototype.delete = function (id) {
-        return this.http.delete(this.config.apiUrl + '/users/' + id, this.jwt());
-    };
-    // private helper methods
-    UserService.prototype.jwt = function () {
+    ArticleService.prototype.jwt = function () {
         // create authorization header with jwt token
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
@@ -47,11 +38,11 @@ var UserService = (function () {
             return new http_1.RequestOptions({ headers: headers });
         }
     };
-    return UserService;
+    return ArticleService;
 }());
-UserService = __decorate([
+ArticleService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig])
-], UserService);
-exports.UserService = UserService;
-//# sourceMappingURL=user.service.js.map
+], ArticleService);
+exports.ArticleService = ArticleService;
+//# sourceMappingURL=article.service.js.map

@@ -11,31 +11,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var index_1 = require("../_services/index");
+var index_2 = require("../_services/index");
 var HomeComponent = (function () {
-    function HomeComponent(userService) {
+    function HomeComponent(articleService, userService) {
+        this.articleService = articleService;
         this.userService = userService;
-        this.users = [];
+        this.articles = [];
+        this.currentArticle = JSON.parse('{"title":"this","body":"this","created_at":"this","updated_at":"at this"}');
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.user = JSON.parse(localStorage.getItem('currentUser')).username;
+        console.log(this.currentUser);
     }
     HomeComponent.prototype.ngOnInit = function () {
-        this.loadAllUsers();
+        this.loadAllArticles();
+        console.log(this.loadAllArticles());
     };
-    HomeComponent.prototype.deleteUser = function (id) {
+    // // deleteArtcle(id: number) {
+    // //     this.articleService.delete(id).subscribe(() => { this.loadAllArticles() });
+    // // }
+    HomeComponent.prototype.loadAllArticles = function () {
         var _this = this;
-        this.userService.delete(id).subscribe(function () { _this.loadAllUsers(); });
+        this.articleService.getAll().subscribe(function (articles) {
+            _this.articles = articles;
+            // console.log(this.articles);
+        });
     };
-    HomeComponent.prototype.loadAllUsers = function () {
-        var _this = this;
-        this.userService.getAll().subscribe(function (users) { _this.users = users; });
-    };
-    HomeComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            templateUrl: 'home.component.html'
-        }),
-        __metadata("design:paramtypes", [index_1.UserService])
-    ], HomeComponent);
     return HomeComponent;
 }());
+HomeComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        templateUrl: 'home.component.html'
+        // template: '<h1>Hellow World</h1>',
+        // providers: [ArticleService]
+    }),
+    __metadata("design:paramtypes", [index_2.ArticleService, index_1.UserService])
+], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

@@ -22,32 +22,33 @@ var index_6 = require("./register/index");
 var AppModule = (function () {
     function AppModule() {
     }
-    AppModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                platform_browser_1.BrowserModule,
-                forms_1.FormsModule,
-                http_1.HttpModule,
-                app_routing_1.routing
-            ],
-            declarations: [
-                app_component_1.AppComponent,
-                index_1.AlertComponent,
-                index_4.HomeComponent,
-                index_5.LoginComponent,
-                index_6.RegisterComponent
-            ],
-            providers: [
-                app_config_1.AppConfig,
-                index_2.AuthGuard,
-                index_3.AlertService,
-                index_3.AuthenticationService,
-                index_3.UserService
-            ],
-            bootstrap: [app_component_1.AppComponent]
-        })
-    ], AppModule);
     return AppModule;
 }());
+AppModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            platform_browser_1.BrowserModule,
+            forms_1.FormsModule,
+            http_1.HttpModule,
+            app_routing_1.routing
+        ],
+        declarations: [
+            app_component_1.AppComponent,
+            index_1.AlertComponent,
+            index_4.HomeComponent,
+            index_5.LoginComponent,
+            index_6.RegisterComponent
+        ],
+        providers: [
+            app_config_1.AppConfig,
+            index_2.AuthGuard,
+            index_3.AlertService,
+            index_3.AuthenticationService,
+            index_3.UserService,
+            index_3.ArticleService
+        ],
+        bootstrap: [app_component_1.AppComponent]
+    })
+], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

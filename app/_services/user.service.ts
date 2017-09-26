@@ -13,8 +13,8 @@ export class UserService {
         var mytoken=JSON.parse(localStorage.getItem('currentUser')).token;
         console.log(JSON.parse(localStorage.getItem('currentUser')).token);
         return this.http.get(this.config.apiUrl + '/articles/2'+'?token='+mytoken).map((response: Response) =>
-        // {console.log(response);}) //
-        response.json());
+        {console.log(response);}) //
+        // response.json());
         // return this.http.get(this.config.apiUrl + '/articles/2', this.jwt()).map((response: Response) =>
         // response.json());
     }
